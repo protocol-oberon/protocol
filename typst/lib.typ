@@ -12,27 +12,28 @@
 
 
 #let parse-file-metadata(filename) = {
-  // Remove extension
   let base = filename.trim(".typ")
-
-  // Split at the time-title separator
   let parts = base.split("--")
   let stamp = parts.at(0)
-  let rest = parts.at(1, default: "untitled__none")
 
-  // Split at the title-tags separator
+  // Extract date components
+  let year  = stamp.slice(0, 4)
+  let month = stamp.slice(4, 6)
+  let day   = stamp.slice(6, 8)
+  let formatted-date = year + "-" + month + "-" + day
+
+  let rest = parts.at(1, default: "untitled__none")
   let content = rest.split("__")
-  let raw-title = content.at(0)
-  let raw-tags = content.at(1, default: "")
 
   (
-    date: stamp.slice(0, 8),
+    date: formatted-date, // Now 2026-04-27
+    raw-date: stamp.slice(0, 8),
     time: (
       hr: stamp.slice(9, 11),
       min: stamp.slice(11, 13),
       sec: stamp.slice(13, 15)
     ),
-    title: raw-title.replace("-", " "),
-    tags: raw-tags.split("_")
+    title: content.at(0).replace("-", " "),
+    tags: content.at(1, default: "").split("_")
   )
 }
