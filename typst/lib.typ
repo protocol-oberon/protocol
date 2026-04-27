@@ -11,20 +11,28 @@
 #let colors = lab-colors
 
 
-#let parse-file-metadata(path) = {
-  // path format: 20260427T091208--title__slug.typ
-  let filename = str(path).split("/").last()
-  let parts = filename.split("--")
+#let parse-file-metadata(filename) = {
+  // Remove extension
+  let base = filename.trim(".typ")
 
-  let timestamp = parts.at(0, default: "00000000T000000")
-  let content = parts.at(1, default: "unknown")
+  // Split at the time-title separator
+  let parts = base.split("--")
+  let stamp = parts.at(0)
+  let rest = parts.at(1, default: "untitled__none")
 
-  // Split title and tags/slug at the double underscore
-  let title-parts = content.split("__")
-  let raw-title = title-parts.at(0).replace("-", " ")
+  // Split at the title-tags separator
+  let content = rest.split("__")
+  let raw-title = content.at(0)
+  let raw-tags = content.at(1, default: "")
 
   (
-    id: timestamp,
-    title: raw-title,
+    date: stamp.slice(0, 8),
+    time: (
+      hr: stamp.slice(9, 11),
+      min: stamp.slice(11, 13),
+      sec: stamp.slice(13, 15)
+    ),
+    title: raw-title.replace("-", " "),
+    tags: raw-tags.split("_")
   )
 }
