@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>name</key><string>Paramount Light</string>
+    <key>settings</key>
+    <array>
+        <dict>
+            <key>settings</key>
+            <dict>
+                <key>background</key><string>#FFFFFF</string>
+                <key>foreground</key><string>#080808</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>name</key><string>Comment</string>
+            <key>scope</key><string>comment</string>
+            <key>settings</key>
+            <dict><key>foreground</key><string>#A0A0A0</string></dict>
+        </dict>
+        <dict>
+            <key>name</key><string>Keyword &amp; Operators</string>
+            <key>scope</key><string>keyword, storage, keyword.operator</string>
+            <key>settings</key>
+            <dict><key>fontStyle</key><string>bold</string></dict>
+        </dict>
+        <dict>
+            <key>name</key><string>String &amp; Constant</string>
+            <key>scope</key><string>string, constant.numeric, constant.language</string>
+            <key>settings</key>
+            <dict><key>foreground</key><string>#7040A0</string></dict>
+        </dict>
+    </array>
+</dict>
+</plist>
