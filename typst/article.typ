@@ -76,9 +76,6 @@
           size: 10pt,
           weight: "light"
         )
-        set raw(wrap: false)
-        show raw: set block(clip: true)
-
         // 3. IMPORTANT: Tell Typst to actually show the quote content
         it
     }
