@@ -61,6 +61,21 @@
         fill: white,
     )
 
+    // Style Quote
+    show quote: set block(
+        width: 80%,
+        inset: (left: 12pt, top: 10pt, bottom: 10pt),
+        stroke: (right: 2pt + lab-colors.accent),
+        fill: white,
+    )
+
+    show quote: it => {
+        show raw: set text(
+            size: 10pt,
+            weight: "light"
+        )
+    }
+
     // Set font for math
     show math.equation: set text(font: "IosevkaTerm NF Light Obl")
 
