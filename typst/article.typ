@@ -62,18 +62,25 @@
     )
 
     // Style Quote
-    show quote: set block(
-        width: 80%,
-        inset: (left: 12pt, top: 10pt, bottom: 10pt),
-        stroke: (right: 2pt + lab-colors.accent),
-        fill: white,
-    )
-
     show quote: it => {
-        show raw: set text(
-            size: 10pt,
-            weight: "light"
+        // 1. Apply the block styling to the wrapper
+        set block(
+          width: 80%,
+          inset: (left: 12pt, top: 10pt, bottom: 10pt),
+          stroke: (right: 2pt + lab-colors.accent),
+          fill: white,
         )
+
+        // 2. Apply the specific raw/code styling inside this quote
+        show raw: set text(
+          size: 10pt,
+          weight: "light"
+        )
+        set raw(wrap: false)
+        show raw: set block(clip: true)
+
+        // 3. IMPORTANT: Tell Typst to actually show the quote content
+        it
     }
 
     // Set font for math
