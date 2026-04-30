@@ -9,7 +9,7 @@
         above: 6pt,
         below: 6pt
     )[
-        #line(length: 85%, stroke: 0.5pt + luma(200))
+        #line(length: 100%, stroke: 0.5pt + luma(200))
         #set align(left)
         #set text(size: 9pt)
         #if title != none [*#title* \ #v(0.2em)]
@@ -82,13 +82,15 @@
         it
     }
 
-    // Bulleted Lists (Unordered)
+    // Lists
     set list(indent: 1em, body-indent: 1em)
     show list: set block(above: 1em, below: 1em)
 
     // Enums
     set enum(indent: 1em, body-indent: 1em)
     show enum: set block(above: 1em, below: 1em)
+
+    set terms(indent: 1em, hanging-indent: 1em)
 
     // Header and Page numbering
     set page(
