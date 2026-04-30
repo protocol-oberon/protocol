@@ -1,69 +1,111 @@
 #import "shared.typ": *
 
 #let framed(title: none, body) = {
-  block(
-    width: 100%,
-    inset: (y: 0.8em),
-    breakable: false,
-    spacing: 0pt,
-    above: 0pt,
-    below: 0pt
-  )[
-    #line(length: 100%, stroke: 0.5pt + luma(200))
-    #set align(center)
-    #set text(size: 10pt)
-    #if title != none [*#title* \ #v(0.2em)]
-    #body
-    #line(length: 100%, stroke: 0.5pt + luma(200))
-  ]
+    block(
+        width: 100%,
+        inset: (y: 0.8em),
+        breakable: false,
+        spacing: 0pt,
+        above: 6pt,
+        below: 6pt
+    )[
+        #line(length: 100%, stroke: 0.5pt + luma(200))
+        #set align(center)
+        #set text(size: 9pt)
+        #if title != none [*#title* \ #v(0.2em)]
+        #body
+        #line(length: 100%, stroke: 0.5pt + luma(200))
+    ]
 }
 
+#let appendix(body) = {
+    // Reset counters for images, tables, AND code blocks (raw)
+    counter(figure.where(kind: image)).update(0)
+    counter(figure.where(kind: table)).update(0)
+    counter(figure.where(kind: raw)).update(0)
 
-#let paper(title: none, body) = {
-  // Font & General Text settings
-  set text(font: body-font, size: 11pt)
-  set par(first-line-indent: 1.5em, spacing: 0.85em, justify: true)
+    // Set numbering to A.1 for all figures
+    set figure(numbering: "A.1")
 
-  // Academic Headings
-  show heading: set align(center)
-  show heading: set text(size: 20pt, weight: "regular")
-  show heading: smallcaps
-  set heading(numbering: "I.I.I.")
+    set text(size: 9pt)
+    set par(spacing: 1em)
 
-  // Figure formatting (Original Logic)
-  set figure(gap: 0.5em)
-  set figure.caption(position: top)
-  show figure: set block(above: 1.5em, below: 1.5em)
-  show figure.caption: it => context {
-    block(width: 85%, below: 0pt, inset: (bottom: 0pt))[
-      #set align(center)
-      *#it.supplement #it.counter.display()* #it.separator #it.body
+    align(left)[
+        #block(spacing: 1em, width: 80%)[
+            #body
+            #v(1em)
+        ]
     ]
-  }
+}
 
-  // Code blocks (Original Logic with IosevkaTerm NF)
-  let code-stroke = 0.5pt + luma(200)
-  show raw.where(block: true): it => academic-code(it)
+#let paper(title: none, author: none, body) = {
+    // Font & General Text settings
+    set text(font: body-font, size: 11pt)
+    set par(first-line-indent: 1.5em, spacing: 0.85em, justify: true)
 
-  // Header and Page numbering
-  set page(
-    numbering: "— 1 —",
-    header: context {
-      if counter(page).get().first() > 1 [
-        Modal _μ Calculus for Intracellular Computation — PhD Proposal_
-        #h(1fr)
-        _Shiloh Alleyne BSC, MSC_
-      ]
+    // Code blocks and Quote specific behavior
+    set raw(theme: "oberon.tmTheme")
+    show raw.where(block: true): it => academic-code(it)
+
+    // Academic Headings
+    show heading: set align(center)
+    show heading: set text(size: 20pt, weight: "regular")
+    show heading: smallcaps
+    set heading(numbering: "I.I.I.")
+
+    // Figure formatting
+    set figure(numbering: "I", supplement: [Figure])
+    show figure: set block(above: 12pt)
+
+    show figure.caption: it => {
+        set text(size: 9pt)
+        v(6pt)
+        block(width: 80%)[
+            #set align(center)
+            #it
+        ]
+        v(1em)
     }
-  )
 
-  // Title rendering
-  if title != none {
-    align(center)[
-      #text(size: 22pt)[#title]
-      #v(2em)
-    ]
-  }
 
-  body
+    // Quotes
+    show quote: it => {
+        set block(
+            width: 80%,
+            inset: (left: 12pt, top: 10pt, bottom: 10pt),
+            stroke: (right: 2pt + lab-colors.accent),
+            fill: white,
+        )
+        show raw: set text(size: 10pt, weight: "light")
+        show raw: set block(clip: true)
+        set raw(wrap: false)
+        it
+    }
+
+    // Enums
+    set enum(indent: 1em, body-indent: 1em)
+    show enum: set block(above: 1em, below: 1em)
+
+    // Header and Page numbering
+    set page(
+        numbering: "— 1 —",
+        header: context {
+            if counter(page).get().first() > 1 [
+                #set text(size: 9pt, style: "italic")
+                #title
+                #h(1fr)
+                #author
+            ]
+        }
+    )
+
+    // Title rendering
+    if title != none {
+        align(center)[
+            #text(size: 22pt)[#title]
+            #v(2em)
+        ]
+    }
+
+    body
 }

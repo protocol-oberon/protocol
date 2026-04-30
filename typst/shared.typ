@@ -24,12 +24,13 @@
 }
 
 // Academic Style: Lighter refined lines
+// Academic Style: Lighter refined lines
 #let academic-code(it) = {
-  set text(font: mono-font, size: 8pt)
-  stack(
-    spacing: 1.5em,
-    line(length: 100%, stroke: academic-stroke),
-    pad(x: 0.5em, it),
-    line(length: 100%, stroke: academic-stroke),
-  )
+    set text(font: mono-font, size: 9pt)
+    stack(
+        spacing: 1.5em,
+        line(length: 100%, stroke: academic-stroke),
+        align(left, pad(x: 0.5em, it)),
+        line(length: 100%, stroke: academic-stroke),
+    )
 }

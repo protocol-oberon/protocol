@@ -1,6 +1,6 @@
 // 1. Internal Imports
 #import "article.typ": article
-#import "paper.typ": paper, framed
+#import "paper.typ": paper, framed, appendix
 #import "shared.typ": *
 
 // Export specific color aliases
