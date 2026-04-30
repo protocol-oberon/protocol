@@ -99,6 +99,22 @@
         }
     )
 
+    // Style level 1 headings
+    show heading.where(level: 1): it => {
+        set text(size: 18pt)
+        block(above: 2em, below: 1em)[
+            #it
+        ]
+    }
+
+    show heading.where(level: 2): it => {
+        set text(size: 14pt)
+        block(above: 2em, below: 1em)[
+            #it
+        ]
+    }
+
+
     // Title rendering
     if title != none {
         align(center)[
