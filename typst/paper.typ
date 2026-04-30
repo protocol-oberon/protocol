@@ -108,8 +108,11 @@
     // Style level 1 headings
     show heading.where(level: 1): it => {
         set text(size: 18pt)
-        block(above: 1em, below: 1em)[
-            #it
+        block(above: 1.5em, below: 1em)[
+            #box(
+                stroke: (bottom: 1pt + black),
+                inset: (x: 0.5em, bottom: 0.3em),
+            )[#it]
         ]
     }
 
