@@ -9,8 +9,8 @@
         above: 6pt,
         below: 6pt
     )[
-        #line(length: 100%, stroke: 0.5pt + luma(200))
-        #set align(center)
+        #line(length: 85%, stroke: 0.5pt + luma(200))
+        #set align(left)
         #set text(size: 9pt)
         #if title != none [*#title* \ #v(0.2em)]
         #body
@@ -82,6 +82,10 @@
         it
     }
 
+    // Bulleted Lists (Unordered)
+    set list(indent: 1em, body-indent: 1em)
+    show list: set block(above: 1em, below: 1em)
+
     // Enums
     set enum(indent: 1em, body-indent: 1em)
     show enum: set block(above: 1em, below: 1em)
@@ -102,14 +106,14 @@
     // Style level 1 headings
     show heading.where(level: 1): it => {
         set text(size: 18pt)
-        block(above: 2em, below: 1em)[
+        block(above: 1em, below: 1em)[
             #it
         ]
     }
 
     show heading.where(level: 2): it => {
         set text(size: 14pt)
-        block(above: 2em, below: 1em)[
+        block(above: 1em, below: 1em)[
             #it
         ]
     }
